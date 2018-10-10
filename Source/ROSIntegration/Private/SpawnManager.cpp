@@ -2,7 +2,8 @@
 
 USpawnManager::USpawnManager()
 {
-	std::cout << "Hi from USpawnManager CTOR" << std::endl;
+	// Joseph: Thank you unreal. cout doesn't work apperantly.
+	std::wcout << "Hi from USpawnManager CTOR" << std::endl;
 	AddToRoot();
 	//	 _SpawnObjectMessageQueue = new TQueue<SpawnObjectMessage, EQueueMode::Spsc>;
 }
@@ -16,10 +17,11 @@ void USpawnManager::Tick(float DeltaTime)
 {
 	SpawnObjectMessage Message;
 	while (_SpawnObjectMessageQueue.Dequeue(Message)) {
-		std::cout << "SpawnManager: Handling SpawnObjectMessage" << std::endl;
-		std::cout << "Message contains: Action " << Message._Action  << " and Type: " << Message._Type<< std::endl;
-		std::cout << "				 " << TCHAR_TO_UTF8(*Message._MeshResource) << std::endl;
-		std::cout << "				 " << TCHAR_TO_UTF8(*Message._Text) << std::endl;
+		// Joseph: Thank you unreal. cout doesn't work apperantly.
+		std::wcout << "SpawnManager: Handling SpawnObjectMessage" << std::endl;
+		std::wcout << "Message contains: Action " << Message._Action  << " and Type: " << Message._Type<< std::endl;
+		std::wcout << "				 " << TCHAR_TO_UTF8(*Message._MeshResource) << std::endl;
+		std::wcout << "				 " << TCHAR_TO_UTF8(*Message._Text) << std::endl;
 
 		//if (Message._Action == SpawnObjectMessage::ACTION_TYPE::MODIFY) {
 		//	std::cout << "SpawnManager: Modify Messages are not supported currently" << std::endl;
@@ -33,7 +35,7 @@ void USpawnManager::Tick(float DeltaTime)
 			for (TActorIterator<ASpawnableObject> ActorItr(GetWorld()); ActorItr; ++ActorItr) {
 				ASpawnableObject* Obj = *ActorItr;
 				if (ActorItr->GetWorld() != this->GetWorld()) {
-					std::cout << "Skipping object from other World" << std::endl;
+					std::wcout << "Skipping object from other World" << std::endl;
 					continue;
 				}
 				if (Message._Action == SpawnObjectMessage::ACTION_TYPE::ACTION_DELETEALL ||
@@ -54,7 +56,8 @@ void USpawnManager::Tick(float DeltaTime)
 			Message._Type == SpawnObjectMessage::OBJECT_TYPE::CYLINDER ||
 			Message._Type == SpawnObjectMessage::OBJECT_TYPE::SPHERE ||
 			Message._Type == SpawnObjectMessage::OBJECT_TYPE::MESH_RESOURCE)) {
-			std::cerr << "Pulled unsupported Object Type from queued SpawnMessage: " << Message._Type << std::endl;
+			// Joseph: Thank you unreal. cerr doesn't work apperantly.
+			std::wcerr << "Pulled unsupported Object Type from queued SpawnMessage: " << Message._Type << std::endl;
 			return;
 		}
 
@@ -117,7 +120,8 @@ void USpawnManager::Tick(float DeltaTime)
 			break;
 
 		default:
-			std::cerr << "Unsupported Object Type in type handling. This should never happen. Check pre-check. Type:"
+			// Joseph: Thank you unreal. cerr doesn't work apperantly.
+			std::wcerr << "Unsupported Object Type in type handling. This should never happen. Check pre-check. Type:"
 				<< Message._Type << std::endl;
 			break;
 		}

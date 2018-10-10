@@ -50,7 +50,7 @@ namespace rosbridge2cpp {
 			bson_t bson;
 			bson_error_t error;
 			if (!bson_init_from_json(&bson, str_repr.c_str(), -1, &error)) {
-				printf("bson_init_from_json() failed: %s\n", error.message);
+				wprintf(L"bson_init_from_json() failed: %hs\n", error.message);
 				bson_destroy(&bson);
 				return false;
 			}
